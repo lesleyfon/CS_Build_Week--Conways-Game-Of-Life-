@@ -30,7 +30,7 @@ for (let i = 0; i < numRows; i++) {
 	}
 }
 
-function getNeighborSum(grid, i, k) {
+function getNeighborSum(grid, i, k, numRows, numColumns) {
 	let sum = 0;
 
 	if (i === 0 && k === 0) {

@@ -7,11 +7,12 @@ function App() {
 		cols: 10,
 	});
 
+	const [running, setRunning] = useState(false);
 	const [grid, setGrid] = useState(() => {
 		let rows = [];
 
 		for (let i = 0; i < rowsCols.rows; i++) {
-			rows.push(Array.from(Array(rowsCols.cols), () => (Math.random() > 0.6 ? 1 : 0)));
+			rows.push(Array.from(Array(rowsCols.cols), () => (Math.random() > 0.8 ? 1 : 0)));
 		}
 		return rows;
 	});
@@ -42,7 +43,7 @@ function App() {
 					row.map((cel, k) => (
 						<div
 							key={`${i}-${k}`}
-							onClick={() => updateGrid(i, k)}
+							onClick={() => !running && updateGrid(i, k)}
 							style={{
 								border: "1px solid black",
 								backgroundColor: cel === 1 ? "#DFBBF2" : null,
