@@ -29,8 +29,6 @@ for (let i = 0; i < numRows; i++) {
 		}
 	}
 }
-console.log("Copy \n");
-console.table(gridCopy);
 
 function getNeighborSum(grid, i, k) {
 	let sum = 0;
