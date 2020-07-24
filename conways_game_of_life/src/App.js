@@ -16,6 +16,18 @@ function App() {
 		return rows;
 	});
 
+	const updateGrid = (i, k) => {
+		setGrid((prevState) => {
+			return prevState.map((rows, rowsIndex) =>
+				rows.map((column, columnIndex) => {
+					if (rowsIndex === i && columnIndex === k) {
+						column = 1;
+					}
+					return column;
+				})
+			);
+		});
+	};
 	return (
 		<main className="App">
 			<section
@@ -30,7 +42,7 @@ function App() {
 					row.map((cel, k) => (
 						<div
 							key={`${i}-${k}`}
-							onClick={() => console.log(i, k)}
+							onClick={() => updateGrid(i, k)}
 							style={{
 								border: "1px solid black",
 								backgroundColor: cel === 1 ? "#DFBBF2" : null,
