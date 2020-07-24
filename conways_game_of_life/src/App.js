@@ -21,7 +21,7 @@ function App() {
 			return prevState.map((rows, rowsIndex) =>
 				rows.map((column, columnIndex) => {
 					if (rowsIndex === i && columnIndex === k) {
-						column = 1;
+						column = column === 0 ? 1 : 0;
 					}
 					return column;
 				})
