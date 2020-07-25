@@ -31,6 +31,14 @@ function App() {
 	};
 	return (
 		<main className="App">
+			<nav>
+				<ul>
+					<li onClick={() => setRunning(!running)}>
+						{" "}
+						{running ? "Stop Game" : "Start Game"}
+					</li>
+				</ul>
+			</nav>
 			<section
 				className="game_grid"
 				style={{

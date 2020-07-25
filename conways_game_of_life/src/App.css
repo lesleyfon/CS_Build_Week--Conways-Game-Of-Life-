@@ -2,6 +2,7 @@
 	text-align: center;
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 	align-items: center;
 	min-height: 100vh;
 }
@@ -39,4 +40,20 @@
 	to {
 		transform: rotate(360deg);
 	}
+}
+
+nav ul {
+	display: flex;
+	justify-content: start;
+	width: 500px;
+}
+ul li {
+	list-style: none;
+	font-size: large;
+	border: 1px solid lightgray;
+	padding: 7px 10px;
+}
+
+ul li:hover {
+	cursor: pointer;
 }
