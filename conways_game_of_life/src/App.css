@@ -44,7 +44,7 @@
 
 nav ul {
 	display: flex;
-	justify-content: start;
+	justify-content: flex-start;
 	width: 500px;
 }
 ul li {
@@ -52,6 +52,7 @@ ul li {
 	font-size: large;
 	border: 1px solid lightgray;
 	padding: 7px 10px;
+	margin-right: 10px;
 }
 
 ul li:hover {

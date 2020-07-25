@@ -12,11 +12,25 @@ function App() {
 		let rows = [];
 
 		for (let i = 0; i < rowsCols.rows; i++) {
-			rows.push(Array.from(Array(rowsCols.cols), () => (Math.random() > 0.8 ? 1 : 0)));
+			rows.push(Array.from(Array(rowsCols.cols), () => 0));
 		}
 		return rows;
 	});
 
+	/**
+	 *
+	 * @param {*} grid The State of grid
+	 * Updates State with random cells
+	 */
+	const randomCells = () => {
+		setGrid(() => {
+			let rows = [];
+			for (let i = 0; i < rowsCols.rows; i++) {
+				rows.push(Array.from(Array(rowsCols.cols), () => (Math.random() > 0.8 ? 1 : 0)));
+			}
+			return rows;
+		});
+	};
 	const updateGrid = (i, k) => {
 		setGrid((prevState) => {
 			return prevState.map((rows, rowsIndex) =>
@@ -37,6 +51,7 @@ function App() {
 						{" "}
 						{running ? "Stop Game" : "Start Game"}
 					</li>
+					<li onClick={randomCells}> Random Cells</li>
 				</ul>
 			</nav>
 			<section
