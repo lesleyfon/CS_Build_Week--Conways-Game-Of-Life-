@@ -7,7 +7,10 @@ function App() {
 		cols: 10,
 	});
 
+	// To Start and Stop the game
 	const [running, setRunning] = useState(false);
+
+	// Grid rows and columns
 	const [grid, setGrid] = useState(() => {
 		let rows = [];
 
@@ -31,6 +34,13 @@ function App() {
 			return rows;
 		});
 	};
+
+	/**
+	 *
+	 * @param {*} i Row Index
+	 * @param {*} k Column Index
+	 * This Function is used to update the a cell when a user clicks on it toggling from alive to dead
+	 */
 	const updateGrid = (i, k) => {
 		setGrid((prevState) => {
 			return prevState.map((rows, rowsIndex) =>
