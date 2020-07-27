@@ -44,17 +44,24 @@
 
 nav ul {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-between;
 	width: 500px;
+	padding: 0px;
 }
 ul li {
 	list-style: none;
 	font-size: large;
 	border: 1px solid lightgray;
-	padding: 7px 10px;
+	padding: 7px 15px;
 	margin-right: 10px;
+	border-radius: 5px;
 }
-
+ul li:last-child {
+	margin-right: 0px;
+}
 ul li:hover {
 	cursor: pointer;
+	background-color: #dfbbf2;
+	transition: ease-in-out;
+	transition-duration: 1s;
 }
