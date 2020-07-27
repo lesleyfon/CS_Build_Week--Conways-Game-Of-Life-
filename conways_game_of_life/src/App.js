@@ -78,27 +78,29 @@ function App() {
 	return (
 		<main className="App">
 			<nav>
-				<div
-					onClick={() => {
-						setGrid(toad);
-					}}
-				>
-					Toad
-				</div>
-				<div
-					onClick={() => {
-						setGrid(blinker);
-					}}
-				>
-					Blinker
-				</div>
-				<div
-					onClick={() => {
-						setGrid(glider);
-					}}
-				>
-					Glider
-				</div>
+				<ul>
+					<li
+						onClick={() => {
+							setGrid(toad);
+						}}
+					>
+						Toad
+					</li>
+					<li
+						onClick={() => {
+							setGrid(blinker);
+						}}
+					>
+						Blinker
+					</li>
+					<li
+						onClick={() => {
+							setGrid(glider);
+						}}
+					>
+						Glider
+					</li>
+				</ul>
 			</nav>
 			<section
 				className="game_grid"
