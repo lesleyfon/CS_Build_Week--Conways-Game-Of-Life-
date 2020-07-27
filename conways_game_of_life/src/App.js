@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { getNeighborSum, runComputation, createGrid } from "./cgol_algorithm.js";
+import { runComputation, createGrid } from "./cgol_algorithm.js";
 
 function App() {
-	const [rowsCols, setRowsCols] = useState({
+	const [rowsCols] = useState({
 		rows: 10,
 		cols: 10,
 	});
@@ -14,6 +14,7 @@ function App() {
 
 	const [grid, setGrid] = useState(createGrid(rowsCols.rows, rowsCols.cols));
 
+	// Begins the game
 	const runGame = () => {
 		let nextGrid = runComputation(grid, rowsCols.rows, rowsCols.cols);
 		setCount(count + 1);
@@ -35,8 +36,7 @@ function App() {
 
 	/**
 	 *
-	 * @param {*} grid The State of grid
-	 * Updates State with random cells
+	 * Creates random cells
 	 */
 	const randomCells = () => {
 		setGrid(() => {
@@ -69,15 +69,6 @@ function App() {
 	};
 	return (
 		<main className="App">
-			<nav>
-				<ul>
-					<li onClick={() => setRunning(!running)}>
-						{" "}
-						{running ? "Stop Game" : "Start Game"}
-					</li>
-					<li onClick={randomCells}> Random Cells</li>
-				</ul>
-			</nav>
 			<section
 				className="game_grid"
 				style={{
@@ -100,6 +91,14 @@ function App() {
 					))
 				)}
 			</section>
+			<nav>
+				<ul>
+					<li onClick={() => setRunning(true)}>Play</li>
+
+					<li onClick={() => setRunning(false)}>Stop</li>
+					<li onClick={randomCells}> Random Cells</li>
+				</ul>
+			</nav>
 		</main>
 	);
 }
