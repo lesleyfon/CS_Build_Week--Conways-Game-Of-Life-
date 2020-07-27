@@ -1,24 +1,23 @@
 import React, { useState } from "react";
 import "./App.css";
+import { getNeighborSum, runComputation, createGrid } from "./cgol_algorithm.js";
 
 function App() {
 	const [rowsCols, setRowsCols] = useState({
-		rows: 10,
-		cols: 10,
+		rows: 5,
+		cols: 5,
 	});
 
 	// To Start and Stop the game
 	const [running, setRunning] = useState(false);
 
 	// Grid rows and columns
-	const [grid, setGrid] = useState(() => {
-		let rows = [];
+	const [grid, setGrid] = useState(createGrid(rowsCols.rows, rowsCols.cols));
 
-		for (let i = 0; i < rowsCols.rows; i++) {
-			rows.push(Array.from(Array(rowsCols.cols), () => 0));
-		}
-		return rows;
-	});
+	const runGame = () => {
+		let nextGrid = runComputation(grid, rowsCols.rows, rowsCols.cols);
+		setGrid(nextGrid);
+	};
 
 	/**
 	 *
@@ -57,7 +56,11 @@ function App() {
 		<main className="App">
 			<nav>
 				<ul>
-					<li onClick={() => setRunning(!running)}>
+					<li
+						onClick={() => {
+							runGame();
+						}}
+					>
 						{" "}
 						{running ? "Stop Game" : "Start Game"}
 					</li>
