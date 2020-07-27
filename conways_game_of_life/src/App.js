@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { runComputation, createGrid } from "./cgol_algorithm.js";
+import {
+	runComputation,
+	createGrid,
+	createGridToad,
+	createGridBlinker,
+	createGridGlider,
+} from "./cgol_algorithm.js";
 
 function App() {
 	const [rowsCols] = useState({
@@ -13,7 +19,9 @@ function App() {
 	const [running, setRunning] = useState(false);
 
 	const [grid, setGrid] = useState(createGrid(rowsCols.rows, rowsCols.cols));
-
+	const [toad] = useState(createGridToad(rowsCols.rows, rowsCols.cols));
+	const [blinker] = useState(createGridBlinker(rowsCols.rows, rowsCols.cols));
+	const [glider] = useState(createGridGlider(rowsCols.rows, rowsCols.cols));
 	// Begins the game
 	const runGame = () => {
 		let nextGrid = runComputation(grid, rowsCols.rows, rowsCols.cols);
@@ -26,7 +34,6 @@ function App() {
 			if (!running) {
 				return;
 			}
-			console.table(grid);
 			runGame();
 		}, 1000);
 		return () => {
@@ -55,6 +62,7 @@ function App() {
 	 * This Function is used to update the a cell when a user clicks on it toggling from alive to dead
 	 */
 	const updateGrid = (i, k) => {
+		console.log(i, k);
 		setGrid((prevState) => {
 			return prevState.map((rows, rowsIndex) =>
 				rows.map((column, columnIndex) => {
@@ -69,6 +77,29 @@ function App() {
 	};
 	return (
 		<main className="App">
+			<nav>
+				<div
+					onClick={() => {
+						setGrid(toad);
+					}}
+				>
+					Toad
+				</div>
+				<div
+					onClick={() => {
+						setGrid(blinker);
+					}}
+				>
+					Blinker
+				</div>
+				<div
+					onClick={() => {
+						setGrid(glider);
+					}}
+				>
+					Glider
+				</div>
+			</nav>
 			<section
 				className="game_grid"
 				style={{
@@ -91,14 +122,22 @@ function App() {
 					))
 				)}
 			</section>
-			<nav>
+			<footer>
 				<ul>
 					<li onClick={() => setRunning(true)}>Play</li>
 
 					<li onClick={() => setRunning(false)}>Stop</li>
-					<li onClick={randomCells}> Random Cells</li>
+					<li
+						onClick={() => {
+							randomCells();
+							setRunning(false);
+						}}
+					>
+						{" "}
+						Random Cells
+					</li>
 				</ul>
-			</nav>
+			</footer>
 		</main>
 	);
 }

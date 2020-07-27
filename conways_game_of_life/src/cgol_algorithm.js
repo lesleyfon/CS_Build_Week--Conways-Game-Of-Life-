@@ -13,6 +13,38 @@ export function createGrid(numRow, numCols) {
 	return grid;
 }
 
+export function createGridToad(row, col) {
+	const grid = createGrid(row, col);
+	grid[3][3] = 1;
+	grid[3][4] = 1;
+	grid[3][5] = 1;
+	grid[4][4] = 1;
+	grid[4][3] = 1;
+	grid[4][2] = 1;
+	return grid;
+}
+
+export function createGridBlinker(row, col) {
+	// 	3 4
+	// App.js:58 4 4
+	// App.js:58 5 4
+	const grid = createGrid(row, col);
+	grid[3][3] = 1;
+	grid[3][4] = 1;
+	grid[3][5] = 1;
+	return grid;
+}
+
+export function createGridGlider(row, col) {
+	const grid = createGrid(row, col);
+	grid[4][3] = 1;
+	grid[5][4] = 1;
+	grid[5][5] = 1;
+	grid[4][5] = 1;
+	grid[3][5] = 1;
+
+	return grid;
+}
 export function runComputation(grid, row, col) {
 	let gridCopy = createGrid(row, col);
 	for (let i = 0; i < row; i++) {
