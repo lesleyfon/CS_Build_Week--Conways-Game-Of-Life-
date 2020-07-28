@@ -14,7 +14,7 @@ function App() {
 		cols: 15,
 	});
 
-	const [count, setCount] = useState(0);
+	const [generation, setGeneration] = useState(0);
 	// To Start and Stop the game
 	const [running, setRunning] = useState(false);
 
@@ -23,11 +23,11 @@ function App() {
 	// Begins the game
 	const runGame = () => {
 		let nextGrid = runComputation(grid, rowsCols.rows, rowsCols.cols);
-		setCount(count + 1);
+		setGeneration(generation + 1);
 		setGrid(nextGrid);
 	};
 
-	// Useeffect for running the game
+	// UseEffect for running the game
 	useEffect(() => {
 		let interval = setInterval(() => {
 			if (!running) {
@@ -48,7 +48,7 @@ function App() {
 		setGrid(() => {
 			let rows = [];
 			for (let i = 0; i < rowsCols.rows; i++) {
-				rows.push(Array.from(Array(rowsCols.cols), () => (Math.random() > 0.8 ? 1 : 0)));
+				rows.push(Array.from(Array(rowsCols.cols), () => (Math.random() > 0 ? 1 : 0)));
 			}
 			return rows;
 		});
@@ -122,7 +122,7 @@ function App() {
 						/>
 						<input type="submit" />
 					</form>
-					<p>{gridCellCount.count}</p>
+					{generation === 0 ? null : <p>Current Generation: {generation}</p>}
 				</div>
 			</nav>
 			<section
