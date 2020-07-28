@@ -10,10 +10,12 @@ import {
 
 function App() {
 	const [rowsCols, setRowCol] = useState({
-		rows: 15,
-		cols: 15,
+		rows: 25,
+		cols: 25,
 	});
 
+	const [speed, setSpeed] = useState(10);
+	// Keep count of the Generation
 	const [generation, setGeneration] = useState(0);
 	// To Start and Stop the game
 	const [running, setRunning] = useState(false);
@@ -34,11 +36,11 @@ function App() {
 				return;
 			}
 			runGame();
-		}, 100);
+		}, speed);
 		return () => {
 			clearInterval(interval);
 		};
-	}, [running, grid, rowsCols]);
+	}, [running, grid, rowsCols, speed]);
 
 	/**
 	 *
@@ -81,6 +83,7 @@ function App() {
 					<li
 						onClick={(e) => {
 							setGrid(createGridToad(rowsCols.rows, rowsCols.cols));
+							setGeneration(0);
 						}}
 					>
 						Toad
@@ -88,6 +91,7 @@ function App() {
 					<li
 						onClick={(e) => {
 							setGrid(createGridBlinker(rowsCols.rows, rowsCols.cols));
+							setGeneration(0);
 						}}
 					>
 						Blinker
@@ -130,7 +134,20 @@ function App() {
 						/>
 						<input type="submit" />
 					</form>
-					{generation === 0 ? null : <p>Current Generation: {generation}</p>}
+					{generation === 0 ? null : <p>Current Generation Count: {generation}</p>}
+
+					<div id="speed">
+						{console.log(speed)}
+						Speed{" "}
+						<input
+							type="range"
+							min="1"
+							max="20"
+							onChange={(e) => {
+								setSpeed(100 * e.target.value);
+							}}
+						/>
+					</div>
 				</div>
 			</nav>
 			<section
@@ -169,7 +186,14 @@ function App() {
 						{" "}
 						Random Cells
 					</li>
-					<li onClick={() => setGrid(createGrid(rowsCols.rows, rowsCols.cols))}>Clear</li>
+					<li
+						onClick={() => {
+							setGrid(createGrid(rowsCols.rows, rowsCols.cols));
+							setGeneration(0);
+						}}
+					>
+						Clear
+					</li>
 				</ul>
 			</footer>
 		</main>

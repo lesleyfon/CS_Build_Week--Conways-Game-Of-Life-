@@ -72,3 +72,16 @@ form input {
 	font-size: 17px;
 	color: black;
 }
+
+#speed {
+	height: 30px;
+	width: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
+}
+
+#speed input {
+	margin-left: 10px;
+}
