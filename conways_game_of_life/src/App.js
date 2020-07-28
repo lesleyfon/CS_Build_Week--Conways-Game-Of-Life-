@@ -110,12 +110,10 @@ function App() {
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();
-							console.log(gridCellCount);
 							setRowCol({
 								rows: gridCellCount,
 								cols: gridCellCount,
 							});
-							console.log(typeof gridCellCount);
 							setGrid(createGrid(gridCellCount, gridCellCount));
 						}}
 					>
@@ -140,7 +138,6 @@ function App() {
 					margin: "0 auto",
 				}}
 			>
-				{console.log(grid)}
 				{grid.map((row, i) =>
 					row.map((cel, k) => (
 						<div
