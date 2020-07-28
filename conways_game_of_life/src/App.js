@@ -19,10 +19,6 @@ function App() {
 	const [running, setRunning] = useState(false);
 
 	const [grid, setGrid] = useState(createGrid(rowsCols.rows, rowsCols.cols)); // Creates Grid cells
-	// Grid Presets State
-	const [toad, setToad] = useState(createGridToad(rowsCols.rows, rowsCols.cols));
-	const [blinker, setBlinker] = useState(createGridBlinker(rowsCols.rows, rowsCols.cols));
-	const [glider, setGlider] = useState(createGridGlider(rowsCols.rows, rowsCols.cols));
 
 	// Begins the game
 	const runGame = () => {
@@ -106,7 +102,6 @@ function App() {
 				</ul>
 
 				<div className="grid_cells_count">
-					{console.log("gello")}
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();
