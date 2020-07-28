@@ -20,9 +20,9 @@ function App() {
 
 	const [grid, setGrid] = useState(createGrid(rowsCols.rows, rowsCols.cols)); // Creates Grid cells
 	// Grid Presets State
-	const [toad] = useState(createGridToad(rowsCols.rows, rowsCols.cols));
-	const [blinker] = useState(createGridBlinker(rowsCols.rows, rowsCols.cols));
-	const [glider] = useState(createGridGlider(rowsCols.rows, rowsCols.cols));
+	const [toad, setToad] = useState(createGridToad(rowsCols.rows, rowsCols.cols));
+	const [blinker, setBlinker] = useState(createGridBlinker(rowsCols.rows, rowsCols.cols));
+	const [glider, setGlider] = useState(createGridGlider(rowsCols.rows, rowsCols.cols));
 
 	// Begins the game
 	const runGame = () => {
@@ -84,22 +84,21 @@ function App() {
 				<ul>
 					<li
 						onClick={(e) => {
-							setGrid(toad);
+							setGrid(createGridToad(rowsCols.rows, rowsCols.cols));
 						}}
 					>
 						Toad
 					</li>
 					<li
 						onClick={(e) => {
-							setGrid(blinker);
+							setGrid(createGridBlinker(rowsCols.rows, rowsCols.cols));
 						}}
 					>
 						Blinker
 					</li>
 					<li
 						onClick={(e) => {
-							// e.preventDefault();
-							setGrid(glider);
+							setGrid(createGridGlider(rowsCols.rows, rowsCols.cols));
 						}}
 					>
 						Glider
@@ -107,6 +106,7 @@ function App() {
 				</ul>
 
 				<div className="grid_cells_count">
+					{console.log("gello")}
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();
