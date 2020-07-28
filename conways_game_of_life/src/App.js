@@ -105,16 +105,24 @@ function App() {
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();
-							setRowCol({
-								rows: gridCellCount,
-								cols: gridCellCount,
-							});
-							setGrid(createGrid(gridCellCount, gridCellCount));
+							if (gridCellCount >= 25) {
+								setRowCol({
+									rows: gridCellCount,
+									cols: gridCellCount,
+								});
+								setGrid(createGrid(gridCellCount, gridCellCount));
+							} else {
+								setRowCol({
+									rows: 25,
+									cols: 25,
+								});
+								setGrid(createGrid(25, 25));
+							}
 						}}
 					>
 						<input
 							type="number"
-							placeholder="Grid Cells"
+							placeholder="Grid Cells: min grid count (25 X 25)"
 							onChange={(e) => {
 								setGridCellCount(Number(e.target.value));
 							}}
