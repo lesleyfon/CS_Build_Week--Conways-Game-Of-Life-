@@ -9,19 +9,21 @@ import {
 } from "./cgol_algorithm.js";
 
 function App() {
-	const [rowsCols] = useState({
-		rows: 10,
-		cols: 10,
+	const [rowsCols, setRowCol] = useState({
+		rows: 15,
+		cols: 15,
 	});
 
 	const [count, setCount] = useState(0);
 	// To Start and Stop the game
 	const [running, setRunning] = useState(false);
 
-	const [grid, setGrid] = useState(createGrid(rowsCols.rows, rowsCols.cols));
+	const [grid, setGrid] = useState(createGrid(rowsCols.rows, rowsCols.cols)); // Creates Grid cells
+	// Grid Presets State
 	const [toad] = useState(createGridToad(rowsCols.rows, rowsCols.cols));
 	const [blinker] = useState(createGridBlinker(rowsCols.rows, rowsCols.cols));
 	const [glider] = useState(createGridGlider(rowsCols.rows, rowsCols.cols));
+
 	// Begins the game
 	const runGame = () => {
 		let nextGrid = runComputation(grid, rowsCols.rows, rowsCols.cols);
@@ -29,17 +31,18 @@ function App() {
 		setGrid(nextGrid);
 	};
 
+	// Useeffect for running the game
 	useEffect(() => {
 		let interval = setInterval(() => {
 			if (!running) {
 				return;
 			}
 			runGame();
-		}, 1000);
+		}, 100);
 		return () => {
 			clearInterval(interval);
 		};
-	}, [running, grid]);
+	}, [running, grid, rowsCols]);
 
 	/**
 	 *
@@ -54,6 +57,7 @@ function App() {
 			return rows;
 		});
 	};
+	const [gridCellCount, setGridCellCount] = useState("");
 
 	/**
 	 *
@@ -62,7 +66,6 @@ function App() {
 	 * This Function is used to update the a cell when a user clicks on it toggling from alive to dead
 	 */
 	const updateGrid = (i, k) => {
-		console.log(i, k);
 		setGrid((prevState) => {
 			return prevState.map((rows, rowsIndex) =>
 				rows.map((column, columnIndex) => {
@@ -80,36 +83,64 @@ function App() {
 			<nav>
 				<ul>
 					<li
-						onClick={() => {
+						onClick={(e) => {
 							setGrid(toad);
 						}}
 					>
 						Toad
 					</li>
 					<li
-						onClick={() => {
+						onClick={(e) => {
 							setGrid(blinker);
 						}}
 					>
 						Blinker
 					</li>
 					<li
-						onClick={() => {
+						onClick={(e) => {
+							// e.preventDefault();
 							setGrid(glider);
 						}}
 					>
 						Glider
 					</li>
 				</ul>
+
+				<div className="grid_cells_count">
+					<form
+						onSubmit={(e) => {
+							e.preventDefault();
+							console.log(gridCellCount);
+							setRowCol({
+								rows: gridCellCount,
+								cols: gridCellCount,
+							});
+							console.log(typeof gridCellCount);
+							setGrid(createGrid(gridCellCount, gridCellCount));
+						}}
+					>
+						<input
+							type="number"
+							placeholder="Grid Cells"
+							onChange={(e) => {
+								setGridCellCount(Number(e.target.value));
+							}}
+							value={gridCellCount}
+						/>
+						<input type="submit" />
+					</form>
+					<p>{gridCellCount.count}</p>
+				</div>
 			</nav>
 			<section
 				className="game_grid"
 				style={{
 					display: "grid",
-					gridTemplateColumns: `repeat(${rowsCols.cols}, 50px)`,
+					gridTemplateColumns: `repeat(${rowsCols.cols}, 50px)`, // Work on dynamic display of grid cells
 					margin: "0 auto",
 				}}
 			>
+				{console.log(grid)}
 				{grid.map((row, i) =>
 					row.map((cel, k) => (
 						<div
