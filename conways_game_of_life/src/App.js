@@ -161,6 +161,7 @@ function App() {
 						{" "}
 						Random Cells
 					</li>
+					<li onClick={() => setGrid(createGrid(rowsCols.rows, rowsCols.cols))}>Clear</li>
 				</ul>
 			</footer>
 		</main>
