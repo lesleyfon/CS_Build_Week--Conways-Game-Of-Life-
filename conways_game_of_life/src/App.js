@@ -137,7 +137,6 @@ function App() {
 					{generation === 0 ? null : <p>Current Generation Count: {generation}</p>}
 
 					<div id="speed">
-						{console.log(speed)}
 						Speed{" "}
 						<input
 							type="range"
@@ -149,13 +148,40 @@ function App() {
 						/>
 					</div>
 				</div>
+				<footer>
+					<ul>
+						<li onClick={() => setRunning(true)}>Play</li>
+
+						<li onClick={() => setRunning(false)}>Stop</li>
+						<li
+							onClick={() => {
+								randomCells();
+								setRunning(false);
+							}}
+						>
+							{" "}
+							Random Cells
+						</li>
+						<li
+							onClick={() => {
+								setGrid(createGrid(rowsCols.rows, rowsCols.cols));
+								setGeneration(0);
+							}}
+						>
+							Clear
+						</li>
+					</ul>
+				</footer>
 			</nav>
 			<section
 				className="game_grid"
 				style={{
 					display: "grid",
-					gridTemplateColumns: `repeat(${rowsCols.cols}, 50px)`, // Work on dynamic display of grid cells
+					gridTemplateColumns: `repeat(${rowsCols.cols}, ${
+						(25 / rowsCols.cols) * 25 + 2
+					}px`, // Dynamically ajust the columns width based on the number of columns on the screen
 					margin: "0 auto",
+					maxWidth: "1250px",
 				}}
 			>
 				{grid.map((row, i) =>
@@ -166,36 +192,12 @@ function App() {
 							style={{
 								border: "1px solid black",
 								backgroundColor: cel === 1 ? "#DFBBF2" : null,
-								height: "50px",
+								height: `${(25 / rowsCols.cols) * 25}px`,
 							}}
 						/>
 					))
 				)}
 			</section>
-			<footer>
-				<ul>
-					<li onClick={() => setRunning(true)}>Play</li>
-
-					<li onClick={() => setRunning(false)}>Stop</li>
-					<li
-						onClick={() => {
-							randomCells();
-							setRunning(false);
-						}}
-					>
-						{" "}
-						Random Cells
-					</li>
-					<li
-						onClick={() => {
-							setGrid(createGrid(rowsCols.rows, rowsCols.cols));
-							setGeneration(0);
-						}}
-					>
-						Clear
-					</li>
-				</ul>
-			</footer>
 		</main>
 	);
 }
