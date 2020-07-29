@@ -31,6 +31,7 @@ function App() {
 
 	// UseEffect for running the game
 	useEffect(() => {
+		console.log(speed);
 		let interval = setInterval(() => {
 			if (!running) {
 				return;
@@ -103,6 +104,15 @@ function App() {
 					>
 						Glider
 					</li>
+					<li
+						onClick={() => {
+							randomCells();
+							setRunning(false);
+						}}
+					>
+						{" "}
+						Random Cells
+					</li>
 				</ul>
 
 				<div className="grid_cells_count">
@@ -141,9 +151,9 @@ function App() {
 						<input
 							type="range"
 							min="1"
-							max="20"
+							max="100"
 							onChange={(e) => {
-								setSpeed(100 * e.target.value);
+								setSpeed(10 * e.target.value);
 							}}
 						/>
 					</div>
@@ -153,19 +163,12 @@ function App() {
 						<li onClick={() => setRunning(true)}>Play</li>
 
 						<li onClick={() => setRunning(false)}>Stop</li>
-						<li
-							onClick={() => {
-								randomCells();
-								setRunning(false);
-							}}
-						>
-							{" "}
-							Random Cells
-						</li>
+
 						<li
 							onClick={() => {
 								setGrid(createGrid(rowsCols.rows, rowsCols.cols));
 								setGeneration(0);
+								setRunning(false);
 							}}
 						>
 							Clear
