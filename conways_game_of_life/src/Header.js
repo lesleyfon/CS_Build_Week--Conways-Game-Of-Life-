@@ -15,6 +15,7 @@ function Header({
 	setGridCellCount,
 	generation,
 	setSpeed,
+	createGridPulsar,
 }) {
 	return (
 		<nav>
@@ -41,6 +42,13 @@ function Header({
 					}}
 				>
 					Glider
+				</li>
+				<li
+					onClick={(e) => {
+						setGrid(createGridPulsar(rowsCols.rows, rowsCols.cols));
+					}}
+				>
+					Pulsar
 				</li>
 				<li
 					onClick={() => {

@@ -18,6 +18,10 @@
 	}
 }
 
+nav {
+	width: 675px;
+}
+
 ul li {
 	list-style: none;
 	font-size: large;
@@ -39,9 +43,14 @@ ul li:hover {
 footer ul,
 nav ul {
 	display: flex;
-	justify-content: space-between;
-	width: 500px;
 	padding: 0px;
+	justify-content: space-around;
+	align-items: center;
+	width: 675px;
+	align-content: center;
+	padding: 0px;
+	flex-wrap: wrap;
+	margin: 1.5rem 0px;
 }
 
 /* Chrome, Safari, Edge, Opera */

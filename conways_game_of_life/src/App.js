@@ -6,6 +6,7 @@ import {
 	createGridToad,
 	createGridBlinker,
 	createGridGlider,
+	createGridPulsar,
 } from "./cgol_algorithm.js";
 
 // Components
@@ -75,6 +76,7 @@ function App() {
 			return prevState.map((rows, rowsIndex) =>
 				rows.map((column, columnIndex) => {
 					if (rowsIndex === i && columnIndex === k) {
+						console.log("Pulsar", i, k);
 						column = column === 0 ? 1 : 0;
 					}
 
@@ -100,6 +102,7 @@ function App() {
 				setGridCellCount={setGridCellCount}
 				generation={generation}
 				setSpeed={setSpeed}
+				createGridPulsar={createGridPulsar}
 			/>
 			<section
 				className="game_grid"

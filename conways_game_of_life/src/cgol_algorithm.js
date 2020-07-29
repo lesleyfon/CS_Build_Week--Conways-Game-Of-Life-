@@ -45,6 +45,27 @@ export function createGridGlider(row, col) {
 
 	return grid;
 }
+export function createGridPulsar(row, col) {
+	const grid = createGrid(row, col);
+	grid[9][12] = 1;
+	grid[10][12] = 1;
+	grid[10][12] = 1;
+	grid[11][12] = 1;
+	grid[11][12] = 1;
+	grid[12][12] = 1;
+	grid[12][12] = 1;
+	grid[13][12] = 1;
+	grid[13][12] = 1;
+	grid[14][12] = 1;
+	grid[14][12] = 1;
+	grid[10][11] = 1;
+	grid[10][11] = 1;
+	grid[10][13] = 1;
+	grid[10][13] = 1;
+
+	return grid;
+}
+
 export function runComputation(grid, row, col) {
 	let gridCopy = createGrid(row, col);
 	for (let i = 0; i < row; i++) {
