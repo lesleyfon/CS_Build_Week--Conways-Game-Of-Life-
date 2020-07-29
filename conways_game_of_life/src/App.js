@@ -31,7 +31,7 @@ function App() {
 
 	// UseEffect for running the game
 	useEffect(() => {
-		console.log(speed);
+		console.log(gridCellCount);
 		let interval = setInterval(() => {
 			if (!running) {
 				return;
@@ -119,18 +119,25 @@ function App() {
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();
-							if (gridCellCount >= 25) {
-								setRowCol({
-									rows: gridCellCount,
-									cols: gridCellCount,
-								});
-								setGrid(createGrid(gridCellCount, gridCellCount));
-							} else {
+							// console.log(gridCellCount);
+							if (gridCellCount <= 25) {
 								setRowCol({
 									rows: 25,
 									cols: 25,
 								});
 								setGrid(createGrid(25, 25));
+							} else if (gridCellCount >= 100) {
+								setRowCol({
+									rows: 50,
+									cols: 50,
+								});
+								setGrid(createGrid(50, 50));
+							} else {
+								setRowCol({
+									rows: gridCellCount,
+									cols: gridCellCount,
+								});
+								setGrid(createGrid(gridCellCount, gridCellCount));
 							}
 						}}
 					>
