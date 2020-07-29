@@ -7,7 +7,10 @@ import {
 	createGridBlinker,
 	createGridGlider,
 } from "./cgol_algorithm.js";
+
+// Components
 import Header from "./Header";
+import Cell from "./Cell";
 
 function App() {
 	const [rowsCols, setRowCol] = useState({
@@ -35,7 +38,6 @@ function App() {
 
 	// UseEffect for running the game
 	useEffect(() => {
-		console.log(gridCellCount);
 		let interval = setInterval(() => {
 			if (!running) {
 				return;
@@ -110,19 +112,7 @@ function App() {
 					maxWidth: "1250px",
 				}}
 			>
-				{grid.map((row, i) =>
-					row.map((cel, k) => (
-						<div
-							key={`${i}-${k}`}
-							onClick={() => !running && updateGrid(i, k)}
-							style={{
-								border: "1px solid black",
-								backgroundColor: cel === 1 ? "#DFBBF2" : null,
-								height: `${(25 / rowsCols.cols) * 25}px`,
-							}}
-						/>
-					))
-				)}
+				<Cell grid={grid} running={running} updateGrid={updateGrid} rowsCols={rowsCols} />
 			</section>
 		</main>
 	);
