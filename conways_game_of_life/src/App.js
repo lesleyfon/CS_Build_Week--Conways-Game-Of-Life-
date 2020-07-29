@@ -15,9 +15,12 @@ function App() {
 		cols: 25,
 	});
 
+	// State used for updating the speed
 	const [speed, setSpeed] = useState(10);
-	// Keep count of the Generation
+
+	// State to Keep count of the Generation
 	const [generation, setGeneration] = useState(0);
+
 	// To Start and Stop the game
 	const [running, setRunning] = useState(false);
 

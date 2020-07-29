@@ -1,22 +1,21 @@
 import React from "react";
 
-function Header(props) {
-	const {
-		setGrid,
-		createGridToad,
-		rowsCols,
-		setGeneration,
-		createGridBlinker,
-		createGridGlider,
-		randomCells,
-		setRunning,
-		setRowCol,
-		createGrid,
-		gridCellCount,
-		setGridCellCount,
-		generation,
-		setSpeed,
-	} = props;
+function Header({
+	setGrid,
+	createGridToad,
+	rowsCols,
+	setGeneration,
+	createGridBlinker,
+	createGridGlider,
+	randomCells,
+	setRunning,
+	setRowCol,
+	createGrid,
+	gridCellCount,
+	setGridCellCount,
+	generation,
+	setSpeed,
+}) {
 	return (
 		<nav>
 			<ul>
