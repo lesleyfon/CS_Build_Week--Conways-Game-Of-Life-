@@ -65,6 +65,77 @@ export function createGridPulsar(row, col) {
 
 	return grid;
 }
+export function createGridLWSS(row, col) {
+	//(LWSS)
+	const grid = createGrid(row, col);
+	grid[9][9] = 1;
+	grid[9][9] = 1;
+	grid[11][9] = 1;
+	grid[11][9] = 1;
+	grid[12][10] = 1;
+	grid[12][10] = 1;
+	grid[12][12] = 1;
+	grid[12][12] = 1;
+	grid[12][11] = 1;
+	grid[12][11] = 1;
+	grid[12][13] = 1;
+	grid[12][13] = 1;
+	grid[11][13] = 1;
+	grid[11][13] = 1;
+	grid[10][13] = 1;
+	grid[10][13] = 1;
+	grid[9][12] = 1;
+	grid[9][12] = 1;
+
+	return grid;
+}
+export function createGridHWSS(row, col) {
+	//(LWSS)
+	const grid = createGrid(row, col);
+	grid[8][11] = 1;
+	grid[8][12] = 1;
+	grid[9][9] = 1;
+	grid[11][9] = 1;
+	grid[12][10] = 1;
+	grid[12][11] = 1;
+	grid[12][12] = 1;
+	grid[12][13] = 1;
+	grid[12][14] = 1;
+	grid[12][15] = 1;
+	grid[11][15] = 1;
+	grid[10][15] = 1;
+	grid[9][14] = 1;
+
+	return grid;
+}
+export function createGridPenta_decathlon(row, col) {
+	//(LWSS)
+	const grid = createGrid(row, col);
+	grid[8][10] = 1;
+	grid[8][11] = 1;
+	grid[8][12] = 1;
+	grid[9][12] = 1;
+	grid[10][12] = 1;
+	grid[11][12] = 1;
+	grid[12][12] = 1;
+	grid[13][12] = 1;
+	grid[14][12] = 1;
+	grid[15][12] = 1;
+	grid[15][11] = 1;
+	grid[15][10] = 1;
+	grid[14][10] = 1;
+	grid[13][10] = 1;
+	grid[12][10] = 1;
+	grid[11][10] = 1;
+	grid[10][10] = 1;
+	grid[9][10] = 1;
+	grid[13][11] = 1;
+	grid[12][11] = 1;
+	grid[11][11] = 1;
+	grid[10][11] = 1;
+
+	return grid;
+}
 
 export function runComputation(grid, row, col) {
 	let gridCopy = createGrid(row, col);

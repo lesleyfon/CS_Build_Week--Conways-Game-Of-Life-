@@ -7,6 +7,9 @@ import {
 	createGridBlinker,
 	createGridGlider,
 	createGridPulsar,
+	createGridLWSS,
+	createGridHWSS,
+	createGridPenta_decathlon,
 } from "./cgol_algorithm.js";
 
 // Components
@@ -103,6 +106,9 @@ function App() {
 				generation={generation}
 				setSpeed={setSpeed}
 				createGridPulsar={createGridPulsar}
+				createGridLWSS={createGridLWSS}
+				createGridHWSS={createGridHWSS}
+				createGridPenta_decathlon={createGridPenta_decathlon}
 			/>
 			<section
 				className="game_grid"

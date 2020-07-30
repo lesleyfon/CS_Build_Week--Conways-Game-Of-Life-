@@ -16,6 +16,9 @@ function Header({
 	generation,
 	setSpeed,
 	createGridPulsar,
+	createGridLWSS,
+	createGridHWSS,
+	createGridPenta_decathlon,
 }) {
 	return (
 		<nav>
@@ -43,13 +46,7 @@ function Header({
 				>
 					Glider
 				</li>
-				<li
-					onClick={(e) => {
-						setGrid(createGridPulsar(rowsCols.rows, rowsCols.cols));
-					}}
-				>
-					Pulsar
-				</li>
+
 				<li
 					onClick={() => {
 						randomCells();
@@ -58,6 +55,36 @@ function Header({
 				>
 					{" "}
 					Random Cells
+				</li>
+			</ul>
+			<ul>
+				<li
+					onClick={(e) => {
+						setGrid(createGridLWSS(rowsCols.rows, rowsCols.cols));
+					}}
+				>
+					LWSS
+				</li>
+				<li
+					onClick={(e) => {
+						setGrid(createGridHWSS(rowsCols.rows, rowsCols.cols));
+					}}
+				>
+					HWSS
+				</li>
+				<li
+					onClick={(e) => {
+						setGrid(createGridPenta_decathlon(rowsCols.rows, rowsCols.cols));
+					}}
+				>
+					Penta decathlon
+				</li>
+				<li
+					onClick={(e) => {
+						setGrid(createGridPulsar(rowsCols.rows, rowsCols.cols));
+					}}
+				>
+					Pulsar
 				</li>
 			</ul>
 

@@ -44,7 +44,7 @@ footer ul,
 nav ul {
 	display: flex;
 	padding: 0px;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 	width: 675px;
 	align-content: center;
