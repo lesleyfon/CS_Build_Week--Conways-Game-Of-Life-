@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+
+// Preset models
 import {
 	runComputation,
 	createGrid,
@@ -15,6 +17,8 @@ import {
 // Components
 import Header from "./Header";
 import Cell from "./Cell";
+import Modal from "@material-ui/core/Modal";
+import About from "./About";
 
 function App() {
 	const [rowsCols, setRowCol] = useState({
@@ -35,6 +39,7 @@ function App() {
 
 	const [gridCellCount, setGridCellCount] = useState(""); // Handle input field
 
+	const [openModal, setOpenModal] = useState(true);
 	// Begins the game
 	const runGame = () => {
 		let nextGrid = runComputation(grid, rowsCols.rows, rowsCols.cols);
@@ -89,8 +94,23 @@ function App() {
 			);
 		});
 	};
+
+	const handleClose = () => setOpenModal(false);
+
 	return (
 		<main className="App">
+			<div className="modal">
+				<button
+					onClick={(e) => {
+						setOpenModal(true);
+					}}
+				>
+					About
+				</button>
+				<Modal open={openModal} onClose={handleClose}>
+					<About />
+				</Modal>
+			</div>
 			<Header
 				setGrid={setGrid}
 				createGridToad={createGridToad}
