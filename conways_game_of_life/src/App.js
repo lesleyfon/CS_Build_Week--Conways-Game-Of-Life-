@@ -33,6 +33,8 @@ function App() {
 
 	const [grid, setGrid] = useState(createGrid(rowsCols.rows, rowsCols.cols)); // Creates Grid cells
 
+	const [gridCellCount, setGridCellCount] = useState(""); // Handle input field
+
 	// Begins the game
 	const runGame = () => {
 		let nextGrid = runComputation(grid, rowsCols.rows, rowsCols.cols);
@@ -61,12 +63,11 @@ function App() {
 		setGrid(() => {
 			let rows = [];
 			for (let i = 0; i < rowsCols.rows; i++) {
-				rows.push(Array.from(Array(rowsCols.cols), () => (Math.random() > 0 ? 1 : 0)));
+				rows.push(Array.from(Array(rowsCols.cols), () => (Math.random() > 0.9 ? 1 : 0)));
 			}
 			return rows;
 		});
 	};
-	const [gridCellCount, setGridCellCount] = useState("");
 
 	/**
 	 *

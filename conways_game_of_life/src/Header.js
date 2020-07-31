@@ -22,72 +22,72 @@ function Header({
 }) {
 	return (
 		<nav>
-			<ul>
-				<li
-					onClick={(e) => {
-						setGrid(createGridToad(rowsCols.rows, rowsCols.cols));
-						setGeneration(0);
-					}}
-				>
-					Toad
-				</li>
-				<li
-					onClick={(e) => {
-						setGrid(createGridBlinker(rowsCols.rows, rowsCols.cols));
-						setGeneration(0);
-					}}
-				>
-					Blinker
-				</li>
-				<li
-					onClick={(e) => {
-						setGrid(createGridGlider(rowsCols.rows, rowsCols.cols));
-					}}
-				>
-					Glider
-				</li>
-
-				<li
-					onClick={() => {
-						randomCells();
-						setRunning(false);
-					}}
-				>
-					{" "}
-					Random Cells
-				</li>
-			</ul>
-			<ul>
-				<li
-					onClick={(e) => {
-						setGrid(createGridLWSS(rowsCols.rows, rowsCols.cols));
-					}}
-				>
-					LWSS
-				</li>
-				<li
-					onClick={(e) => {
-						setGrid(createGridHWSS(rowsCols.rows, rowsCols.cols));
-					}}
-				>
-					HWSS
-				</li>
-				<li
-					onClick={(e) => {
-						setGrid(createGridPenta_decathlon(rowsCols.rows, rowsCols.cols));
-					}}
-				>
-					Penta decathlon
-				</li>
-				<li
-					onClick={(e) => {
-						setGrid(createGridPulsar(rowsCols.rows, rowsCols.cols));
-					}}
-				>
-					Pulsar
-				</li>
-			</ul>
-
+			<div>
+				<ul>
+					<li
+						onClick={() => {
+							randomCells();
+							setRunning(false);
+						}}
+					>
+						{" "}
+						Random Cells
+					</li>
+					<li
+						onClick={(e) => {
+							setGrid(createGridToad(rowsCols.rows, rowsCols.cols));
+							setGeneration(0);
+						}}
+					>
+						Toad
+					</li>
+					<li
+						onClick={(e) => {
+							setGrid(createGridBlinker(rowsCols.rows, rowsCols.cols));
+							setGeneration(0);
+						}}
+					>
+						Blinker
+					</li>
+					<li
+						onClick={(e) => {
+							setGrid(createGridPulsar(rowsCols.rows, rowsCols.cols));
+						}}
+					>
+						Pulsar
+					</li>
+				</ul>
+				<ul>
+					<li
+						onClick={(e) => {
+							setGrid(createGridGlider(rowsCols.rows, rowsCols.cols));
+						}}
+					>
+						Glider
+					</li>
+					<li
+						onClick={(e) => {
+							setGrid(createGridLWSS(rowsCols.rows, rowsCols.cols));
+						}}
+					>
+						LWSS
+					</li>
+					<li
+						onClick={(e) => {
+							setGrid(createGridHWSS(rowsCols.rows, rowsCols.cols));
+						}}
+					>
+						HWSS
+					</li>
+					<li
+						onClick={(e) => {
+							setGrid(createGridPenta_decathlon(rowsCols.rows, rowsCols.cols));
+						}}
+					>
+						Penta decathlon
+					</li>
+				</ul>
+			</div>
 			<div className="grid_cells_count">
 				<form
 					onSubmit={(e) => {
@@ -112,11 +112,13 @@ function Header({
 							});
 							setGrid(createGrid(gridCellCount, gridCellCount));
 						}
+
+						setGridCellCount("");
 					}}
 				>
 					<input
 						type="number"
-						placeholder="Grid Cells: min grid count (25 X 25)"
+						placeholder="Grid Cells Dimension: min grid count (25 X 25)"
 						onChange={(e) => {
 							setGridCellCount(Number(e.target.value));
 						}}
