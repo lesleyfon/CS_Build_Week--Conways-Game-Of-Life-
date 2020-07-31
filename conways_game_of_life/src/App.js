@@ -17,8 +17,10 @@ import {
 // Components
 import Header from "./Header";
 import Cell from "./Cell";
-import Modal from "@material-ui/core/Modal";
 import About from "./About";
+
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
 
 function App() {
 	const [rowsCols, setRowCol] = useState({
@@ -39,7 +41,7 @@ function App() {
 
 	const [gridCellCount, setGridCellCount] = useState(""); // Handle input field
 
-	const [openModal, setOpenModal] = useState(true);
+	const [openModal, setOpenModal] = useState(false);
 	// Begins the game
 	const runGame = () => {
 		let nextGrid = runComputation(grid, rowsCols.rows, rowsCols.cols);
@@ -107,7 +109,16 @@ function App() {
 				>
 					About
 				</button>
-				<Modal open={openModal} onClose={handleClose}>
+				<Modal
+					open={openModal}
+					onClose={handleClose}
+					onClose={handleClose}
+					closeAfterTransition
+					BackdropComponent={Backdrop}
+					BackdropProps={{
+						timeout: 500,
+					}}
+				>
 					<About />
 				</Modal>
 			</div>
