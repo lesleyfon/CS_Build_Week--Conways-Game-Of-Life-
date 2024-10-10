@@ -1,18 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./App.css";
-
-// Preset models
-import {
-	runComputation,
-	createGrid,
-	createGridToad,
-	createGridBlinker,
-	createGridGlider,
-	createGridPulsar,
-	createGridLWSS,
-	createGridHWSS,
-	createGridPenta_decathlon,
-} from "./cgol_algorithm.js";
 
 // Components
 import Header from "./Header";
@@ -21,6 +8,7 @@ import About from "./About";
 
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
+import { createGrid, runComputation } from "./cgol_algorithm";
 
 function App() {
 	const [rowsCols, setRowCol] = useState({
@@ -98,6 +86,9 @@ function App() {
 	};
 
 	const handleClose = () => setOpenModal(false);
+	const isGridCompletelyDead = useMemo(() => {
+		return grid.every((row) => row.every((c) => c === 0));
+	}, [grid]);
 
 	return (
 		<main className="App">
@@ -122,24 +113,17 @@ function App() {
 				</Modal>
 			</div>
 			<Header
+				isGridCompletelyDead={isGridCompletelyDead}
 				setGrid={setGrid}
-				createGridToad={createGridToad}
 				rowsCols={rowsCols}
 				setGeneration={setGeneration}
-				createGridBlinker={createGridBlinker}
-				createGridGlider={createGridGlider}
 				randomCells={randomCells}
 				setRunning={setRunning}
 				setRowCol={setRowCol}
-				createGrid={createGrid}
 				gridCellCount={gridCellCount}
 				setGridCellCount={setGridCellCount}
 				generation={generation}
 				setSpeed={setSpeed}
-				createGridPulsar={createGridPulsar}
-				createGridLWSS={createGridLWSS}
-				createGridHWSS={createGridHWSS}
-				createGridPenta_decathlon={createGridPenta_decathlon}
 			/>
 			<section
 				className="game_grid"
