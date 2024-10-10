@@ -112,7 +112,6 @@ function App() {
 				<Modal
 					open={openModal}
 					onClose={handleClose}
-					onClose={handleClose}
 					closeAfterTransition
 					BackdropComponent={Backdrop}
 					BackdropProps={{

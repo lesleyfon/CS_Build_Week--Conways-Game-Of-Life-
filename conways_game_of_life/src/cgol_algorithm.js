@@ -5,140 +5,165 @@
  * @returns a 3D array
  */
 export function createGrid(numRow, numCols) {
-	let grid = [];
-	for (let i = 0; i < numRow; i++) {
-		grid.push(Array.from(Array(numCols), () => 0));
-	}
-
+	let grid = Array.from(Array(numRow), () => new Array(numCols).fill(0));
 	return grid;
 }
 
+function setCellToAlive(list, grid) {
+	list.map(([r, c]) => {
+		grid[r][c] = 1;
+	});
+}
 export function createGridToad(row, col) {
 	const grid = createGrid(row, col);
-	grid[3][3] = 1;
-	grid[3][4] = 1;
-	grid[3][5] = 1;
-	grid[4][4] = 1;
-	grid[4][3] = 1;
-	grid[4][2] = 1;
+	const points = [
+		[3, 3],
+		[3, 4],
+		[3, 5],
+		[4, 4],
+		[4, 3],
+		[4, 2],
+	];
+	setCellToAlive(points, grid);
 	return grid;
 }
 
 export function createGridBlinker(row, col) {
-	// 	3 4
-	// App.js:58 4 4
-	// App.js:58 5 4
 	const grid = createGrid(row, col);
-	grid[3][3] = 1;
-	grid[3][4] = 1;
-	grid[3][5] = 1;
+	const points = [
+		[3, 3],
+		[3, 4],
+		[3, 5],
+	];
+	setCellToAlive(points, grid);
 	return grid;
 }
 
 export function createGridGlider(row, col) {
 	const grid = createGrid(row, col);
-	grid[4][3] = 1;
-	grid[5][4] = 1;
-	grid[5][5] = 1;
-	grid[4][5] = 1;
-	grid[3][5] = 1;
+	const points = [
+		[4, 3],
+		[5, 4],
+		[5, 5],
+		[4, 5],
+		[3, 5],
+	];
+
+	setCellToAlive(points, grid);
 
 	return grid;
 }
 export function createGridPulsar(row, col) {
 	const grid = createGrid(row, col);
-	grid[9][12] = 1;
-	grid[10][12] = 1;
-	grid[10][12] = 1;
-	grid[11][12] = 1;
-	grid[11][12] = 1;
-	grid[12][12] = 1;
-	grid[12][12] = 1;
-	grid[13][12] = 1;
-	grid[13][12] = 1;
-	grid[14][12] = 1;
-	grid[14][12] = 1;
-	grid[10][11] = 1;
-	grid[10][11] = 1;
-	grid[10][13] = 1;
-	grid[10][13] = 1;
+	const points = [
+		[9, 12],
+		[10, 12],
+		[10, 12],
+		[11, 12],
+		[11, 12],
+		[12, 12],
+		[12, 12],
+		[13, 12],
+		[13, 12],
+		[14, 12],
+		[14, 12],
+		[10, 11],
+		[10, 11],
+		[10, 13],
+		[10, 13],
+	];
 
+	setCellToAlive(points, grid);
 	return grid;
 }
 export function createGridLWSS(row, col) {
-	//(LWSS)
 	const grid = createGrid(row, col);
-	grid[9][9] = 1;
-	grid[9][9] = 1;
-	grid[11][9] = 1;
-	grid[11][9] = 1;
-	grid[12][10] = 1;
-	grid[12][10] = 1;
-	grid[12][12] = 1;
-	grid[12][12] = 1;
-	grid[12][11] = 1;
-	grid[12][11] = 1;
-	grid[12][13] = 1;
-	grid[12][13] = 1;
-	grid[11][13] = 1;
-	grid[11][13] = 1;
-	grid[10][13] = 1;
-	grid[10][13] = 1;
-	grid[9][12] = 1;
-	grid[9][12] = 1;
-
+	const points = [
+		[9, 9],
+		[9, 9],
+		[11, 9],
+		[11, 9],
+		[12, 10],
+		[12, 10],
+		[12, 12],
+		[12, 12],
+		[12, 11],
+		[12, 11],
+		[12, 13],
+		[12, 13],
+		[11, 13],
+		[11, 13],
+		[10, 13],
+		[10, 13],
+		[9, 12],
+		[9, 12],
+	];
+	setCellToAlive(points, grid);
 	return grid;
 }
 export function createGridHWSS(row, col) {
 	//(LWSS)
 	const grid = createGrid(row, col);
-	grid[8][11] = 1;
-	grid[8][12] = 1;
-	grid[9][9] = 1;
-	grid[11][9] = 1;
-	grid[12][10] = 1;
-	grid[12][11] = 1;
-	grid[12][12] = 1;
-	grid[12][13] = 1;
-	grid[12][14] = 1;
-	grid[12][15] = 1;
-	grid[11][15] = 1;
-	grid[10][15] = 1;
-	grid[9][14] = 1;
-
+	const points = [
+		[8, 11],
+		[8, 12],
+		[9, 9],
+		[11, 9],
+		[12, 10],
+		[12, 11],
+		[12, 12],
+		[12, 13],
+		[12, 14],
+		[12, 15],
+		[11, 15],
+		[10, 15],
+		[9, 14],
+	];
+	setCellToAlive(points, grid);
 	return grid;
 }
 export function createGridPenta_decathlon(row, col) {
 	//(LWSS)
 	const grid = createGrid(row, col);
-	grid[8][10] = 1;
-	grid[8][11] = 1;
-	grid[8][12] = 1;
-	grid[9][12] = 1;
-	grid[10][12] = 1;
-	grid[11][12] = 1;
-	grid[12][12] = 1;
-	grid[13][12] = 1;
-	grid[14][12] = 1;
-	grid[15][12] = 1;
-	grid[15][11] = 1;
-	grid[15][10] = 1;
-	grid[14][10] = 1;
-	grid[13][10] = 1;
-	grid[12][10] = 1;
-	grid[11][10] = 1;
-	grid[10][10] = 1;
-	grid[9][10] = 1;
-	grid[13][11] = 1;
-	grid[12][11] = 1;
-	grid[11][11] = 1;
-	grid[10][11] = 1;
+	const points = [
+		[8, 10],
+		[8, 11],
+		[8, 12],
+		[9, 12],
+		[10, 12],
+		[11, 12],
+		[12, 12],
+		[13, 12],
+		[14, 12],
+		[15, 12],
+		[15, 11],
+		[15, 10],
+		[14, 10],
+		[13, 10],
+		[12, 10],
+		[11, 10],
+		[10, 10],
+		[9, 10],
+		[13, 11],
+		[12, 11],
+		[11, 11],
+		[10, 11],
+	];
+	setCellToAlive(points, grid);
 
 	return grid;
 }
 
+/**
+ *
+ * @param {*} grid current grid
+ * @param {*} row the total number or rows for a grid
+ * @param {*} col total number of columns for a grid
+ * @returns returns the next generation of the grid
+ */
 export function runComputation(grid, row, col) {
 	let gridCopy = createGrid(row, col);
+
 	for (let i = 0; i < row; i++) {
 		for (let k = 0; k < col; k++) {
 			let sum = getNeighborSum(grid, i, k, row, col);
