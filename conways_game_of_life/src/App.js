@@ -17,7 +17,7 @@ function App() {
 	});
 
 	// State used for updating the speed
-	const [speed, setSpeed] = useState(10);
+	const [speed, setSpeed] = useState(50);
 
 	// State to Keep count of the Generation
 	const [generation, setGeneration] = useState(0);
@@ -39,12 +39,13 @@ function App() {
 
 	// UseEffect for running the game
 	useEffect(() => {
+		const inverse = 100 / speed;
 		let interval = setInterval(() => {
 			if (!running) {
 				return;
 			}
 			runGame();
-		}, speed);
+		}, inverse * 100);
 		return () => {
 			clearInterval(interval);
 		};
@@ -75,10 +76,8 @@ function App() {
 			return prevState.map((rows, rowsIndex) =>
 				rows.map((column, columnIndex) => {
 					if (rowsIndex === i && columnIndex === k) {
-						console.log("Pulsar", i, k);
 						column = column === 0 ? 1 : 0;
 					}
-
 					return column;
 				})
 			);
@@ -113,6 +112,7 @@ function App() {
 				</Modal>
 			</div>
 			<Header
+				speed={speed}
 				isGridCompletelyDead={isGridCompletelyDead}
 				setGrid={setGrid}
 				rowsCols={rowsCols}

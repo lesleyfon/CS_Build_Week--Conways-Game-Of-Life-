@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	createGrid,
 	createGridToad,
@@ -9,6 +9,7 @@ import {
 	createGridHWSS,
 	createGridPenta_decathlon,
 } from "./cgol_algorithm.js";
+import "./header.css";
 
 function Header({
 	// State setters
@@ -24,6 +25,7 @@ function Header({
 	randomCells,
 	gridCellCount,
 	generation,
+	speed,
 }) {
 	function updateGridDimensions(e) {
 		e.preventDefault();
@@ -62,6 +64,28 @@ function Header({
 		},
 	];
 
+	function handleSpeedChange(e) {
+		console.log(e.target.value);
+		const speedInputVal = Number(e.target.value);
+		setSpeed(speedInputVal);
+	}
+	useEffect(() => {
+		const range_input = document.getElementById("range-input"),
+			wrap_wrapper = range_input.parentNode;
+
+		document.documentElement.classList.add("js");
+
+		range_input.addEventListener(
+			"input",
+			(e) => {
+				wrap_wrapper.style.setProperty("--val", +range_input.value);
+			},
+			false
+		);
+		return () => {
+			range_input.removeEventListener("input", () => {});
+		};
+	});
 	return (
 		<nav>
 			<div>
@@ -94,16 +118,25 @@ function Header({
 					<input type="submit" />
 				</form>
 				{generation > 0 ? <p>Current Generation Count: {generation}</p> : null}
-				<div id="speed">
-					Speed
-					<input
-						type="range"
-						min="1"
-						max="100"
-						onChange={(e) => {
-							setSpeed(10 * e.target.value);
+				<div className="input-range-container">
+					<label>Speed:</label>
+					<div
+						className="wrap_wrapper"
+						style={{
+							"--min": 0,
+							"--max": 100,
+							"--val": 50,
 						}}
-					/>
+					>
+						<input
+							min="1"
+							max="100"
+							id="range-input"
+							type="range"
+							onChange={handleSpeedChange}
+						/>
+						<output for="r">{speed}</output>
+					</div>
 				</div>
 			</div>
 			<ul>
