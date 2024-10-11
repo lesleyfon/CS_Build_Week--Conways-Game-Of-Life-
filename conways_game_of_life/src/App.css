@@ -12,10 +12,51 @@
 	pointer-events: none;
 }
 
+.game_grid {
+	display: grid;
+	margin: 0 auto;
+	max-width: 1250px;
+}
+
+
+.about {
+	margin-bottom: 16px;
+	font-size: 1rem;
+	font-weight: 600;
+	width: 100px;
+	border: 1px solid lightgray;
+	padding: 7px 15px;
+	margin-right: 10px;
+	border-radius: 5px;
+	background-color: transparent;
+
+}
+
+.main-section {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+aside>div>ul {
+	display: flex;
+	gap: 4px;
+	flex-direction: column;
+}
+
 @media (prefers-reduced-motion: no-preference) {
 	.App-logo {
 		animation: App-logo-spin infinite 20s linear;
 	}
+}
+
+.gen-count {
+	margin: 8px 0px;
+	text-align: left;
+}
+
+.game-controls {
+	margin: 8px 0px;
 }
 
 nav {
@@ -35,12 +76,13 @@ ul li:last-child {
 	margin-right: 0px;
 }
 
+.about:hover,
 ul li:hover,
 input[type="submit"]:hover {
 	cursor: pointer;
 	background-color: #dfbbf2;
 	transition: ease-in-out;
-	transition-duration: 1s;
+	transition-duration: .3s;
 }
 
 footer ul,
@@ -79,6 +121,7 @@ input[type="number"] {
 	height: 40px;
 	padding-left: 10px;
 }
+
 
 input[type="submit"] {
 	outline: none;

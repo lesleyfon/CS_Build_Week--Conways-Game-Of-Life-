@@ -9,6 +9,7 @@ import About from "./About";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import { createGrid, runComputation } from "./cgol_algorithm";
+import Aside from "./Aside";
 
 function App() {
 	const [rowsCols, setRowCol] = useState({
@@ -26,8 +27,6 @@ function App() {
 	const [running, setRunning] = useState(false);
 
 	const [grid, setGrid] = useState(createGrid(rowsCols.rows, rowsCols.cols)); // Creates Grid cells
-
-	const [gridCellCount, setGridCellCount] = useState(""); // Handle input field
 
 	const [openModal, setOpenModal] = useState(false);
 	// Begins the game
@@ -72,6 +71,7 @@ function App() {
 	 * This Function is used to update the a cell when a user clicks on it toggling from alive to dead
 	 */
 	const updateGrid = (i, k) => {
+		console.log(i, k);
 		setGrid((prevState) => {
 			return prevState.map((rows, rowsIndex) =>
 				rows.map((column, columnIndex) => {
@@ -92,11 +92,7 @@ function App() {
 	return (
 		<main className="App">
 			<div className="modal">
-				<button
-					onClick={(e) => {
-						setOpenModal(true);
-					}}
-				>
+				<button onClick={(e) => setOpenModal(true)} className="about">
 					About
 				</button>
 				<Modal
@@ -111,32 +107,37 @@ function App() {
 					<About />
 				</Modal>
 			</div>
-			<Header
-				speed={speed}
-				isGridCompletelyDead={isGridCompletelyDead}
-				setGrid={setGrid}
-				rowsCols={rowsCols}
-				setGeneration={setGeneration}
-				randomCells={randomCells}
-				setRunning={setRunning}
-				setRowCol={setRowCol}
-				gridCellCount={gridCellCount}
-				setGridCellCount={setGridCellCount}
-				generation={generation}
-				setSpeed={setSpeed}
-			/>
-			<section
-				className="game_grid"
-				style={{
-					display: "grid",
-					gridTemplateColumns: `repeat(${rowsCols.cols}, ${
-						(25 / rowsCols.cols) * 25 + 2
-					}px`, // Dynamically ajust the columns width based on the number of columns on the screen
-					margin: "0 auto",
-					maxWidth: "1250px",
-				}}
-			>
-				<Cell grid={grid} running={running} updateGrid={updateGrid} rowsCols={rowsCols} />
+			<section className="main-section">
+				<Aside {...{ setGrid, setGeneration, setRunning, rowsCols, randomCells }} />
+				<section>
+					<Header
+						speed={speed}
+						isGridCompletelyDead={isGridCompletelyDead}
+						setGrid={setGrid}
+						rowsCols={rowsCols}
+						setGeneration={setGeneration}
+						randomCells={randomCells}
+						setRunning={setRunning}
+						setRowCol={setRowCol}
+						generation={generation}
+						setSpeed={setSpeed}
+					/>
+					<section
+						className="game_grid"
+						style={{
+							gridTemplateColumns: `repeat(${rowsCols.cols}, ${
+								(25 / rowsCols.cols) * 25 + 2
+							}px`, // Dynamically adjust the columns width based on the number of columns on the screen
+						}}
+					>
+						<Cell
+							grid={grid}
+							running={running}
+							updateGrid={updateGrid}
+							rowsCols={rowsCols}
+						/>
+					</section>
+				</section>
 			</section>
 		</main>
 	);
