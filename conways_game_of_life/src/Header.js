@@ -1,14 +1,5 @@
-import React, { useEffect } from "react";
-import {
-	createGrid,
-	createGridToad,
-	createGridBlinker,
-	createGridGlider,
-	createGridPulsar,
-	createGridLWSS,
-	createGridHWSS,
-	createGridPenta_decathlon,
-} from "./cgol_algorithm.js";
+import React, { useState, useEffect, useRef } from "react";
+import { createGrid } from "./cgol_algorithm.js";
 import "./header.css";
 
 function Header({
@@ -17,58 +8,16 @@ function Header({
 	setGeneration,
 	setRunning,
 	setRowCol,
-	setGridCellCount,
 	setSpeed,
 	// Variables - props
 	isGridCompletelyDead,
 	rowsCols,
-	randomCells,
-	gridCellCount,
 	generation,
 	speed,
 }) {
-	function updateGridDimensions(e) {
-		e.preventDefault();
-		const defaultCellCount = {
-			rows: gridCellCount,
-			cols: gridCellCount,
-		};
-
-		if (gridCellCount <= 25) {
-			defaultCellCount.rows = 25;
-			defaultCellCount.cols = 25;
-		} else if (gridCellCount >= 100) {
-			defaultCellCount.rows = 50;
-			defaultCellCount.cols = 50;
-		}
-
-		setRowCol(defaultCellCount);
-		setGrid(createGrid(defaultCellCount.rows, defaultCellCount.cols));
-
-		setGridCellCount("");
-	}
-	const data = [
-		{ name: "Random Cells", createPattern: randomCells },
-		{ name: "Toad", createPattern: createGridToad },
-		{ name: "Blinker", createPattern: createGridBlinker },
-		{ name: "Pulsar", createPattern: createGridPulsar },
-		{ name: "Glider", createPattern: createGridGlider },
-		{ name: "LWSS", createPattern: createGridLWSS },
-		{
-			name: "HWSS",
-			createPattern: createGridHWSS,
-		},
-		{
-			name: "Penta decathlon",
-			createPattern: createGridPenta_decathlon,
-		},
-	];
-
-	function handleSpeedChange(e) {
-		console.log(e.target.value);
-		const speedInputVal = Number(e.target.value);
-		setSpeed(speedInputVal);
-	}
+	const [gridCellCount, setGridCellCount] = useState(""); // Handle input field
+	const formRef = useRef(null);
+	const submitterRef = useRef(null);
 	useEffect(() => {
 		const range_input = document.getElementById("range-input"),
 			wrap_wrapper = range_input.parentNode;
@@ -86,38 +35,49 @@ function Header({
 			range_input.removeEventListener("input", () => {});
 		};
 	});
+
+	function updateGridDimensions(e) {
+		e.preventDefault();
+		setRunning(false);
+		const defaultCellCount = {
+			rows: gridCellCount,
+			cols: gridCellCount,
+		};
+		if (gridCellCount <= 25) {
+			defaultCellCount.rows = 25;
+			defaultCellCount.cols = 25;
+		} else if (gridCellCount >= 100) {
+			defaultCellCount.rows = 100;
+			defaultCellCount.cols = 100;
+		}
+
+		setRowCol(defaultCellCount);
+		const grid = createGrid(defaultCellCount.rows, defaultCellCount.cols);
+		setGrid(grid);
+
+		setGridCellCount("");
+	}
+
+	function handleSpeedChange(e) {
+		const speedInputVal = Number(e.target.value);
+		setSpeed(speedInputVal);
+	}
 	return (
 		<nav>
-			<div>
-				<ul>
-					{data.map(({ name, createPattern }) => (
-						<li
-							key={name}
-							onClick={() => {
-								const gridGrn = createPattern(rowsCols.rows, rowsCols.cols);
-								if (gridGrn?.length) {
-									setGrid(gridGrn);
-								}
-								setGeneration(0);
-								setRunning(false);
-							}}
-						>
-							{name}
-						</li>
-					))}
-				</ul>
-			</div>
 			<div className="grid_cells_count">
-				<form onSubmit={updateGridDimensions}>
+				<form onSubmit={updateGridDimensions} ref={formRef}>
 					<input
 						type="number"
+						name="gridCellCount"
 						placeholder="Grid Cells Dimension: min grid count (25 X 25)"
 						onChange={(e) => setGridCellCount(Number(e.target.value))}
 						value={gridCellCount}
 					/>
-					<input type="submit" />
+					<input type="submit" submitterRef={submitterRef} />
 				</form>
-				{generation > 0 ? <p>Current Generation Count: {generation}</p> : null}
+				{generation > 0 ? (
+					<p className="gen-count">Current Generation Count: {generation}</p>
+				) : null}
 				<div className="input-range-container">
 					<label>Speed:</label>
 					<div
@@ -135,11 +95,11 @@ function Header({
 							type="range"
 							onChange={handleSpeedChange}
 						/>
-						<output for="r">{speed}</output>
+						<output htmlFor="range-input">{speed}</output>
 					</div>
 				</div>
 			</div>
-			<ul>
+			<ul className="game-controls">
 				<li
 					onClick={() => {
 						// Only run if we have at least one live cell
