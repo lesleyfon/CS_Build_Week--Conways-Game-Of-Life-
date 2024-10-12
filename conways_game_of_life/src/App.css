@@ -7,11 +7,6 @@
 	min-height: 100vh;
 }
 
-.App-logo {
-	height: 40vmin;
-	pointer-events: none;
-}
-
 .game_grid {
 	display: grid;
 	margin: 0 auto;
