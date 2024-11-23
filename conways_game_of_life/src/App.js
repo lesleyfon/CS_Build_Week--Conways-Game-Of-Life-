@@ -3,15 +3,16 @@ import "./App.css";
 
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
+import { Route } from "react-router-dom/cjs/react-router-dom.min";
 
 // Components
 import Header from "./components/Header";
-import Cell from "./components/Cell";
 import About from "./components/About";
 
 import { createGrid, runComputation } from "./utils/cgol_algorithm";
 import Aside from "./components/Aside";
 import Game from "./layout/original";
+import GOLCanvas from "./layout/withCanvas";
 
 function App() {
 	const [rowsCols, setRowCol] = useState({
@@ -31,15 +32,16 @@ function App() {
 	const [grid, setGrid] = useState(createGrid(rowsCols.rows, rowsCols.cols)); // Creates Grid cells
 
 	const [openModal, setOpenModal] = useState(false);
-	// Begins the game
-	const runGame = () => {
-		let nextGrid = runComputation(grid, rowsCols.rows, rowsCols.cols);
-		setGeneration(generation + 1);
-		setGrid(nextGrid);
-	};
 
 	// UseEffect for running the game
 	useEffect(() => {
+		// Begins the game
+		const runGame = () => {
+			let nextGrid = runComputation(grid, rowsCols.rows, rowsCols.cols);
+			setGeneration(generation + 1);
+			setGrid(nextGrid);
+		};
+
 		const inverse = 100 / speed;
 		let interval = setInterval(() => {
 			if (!running) {
@@ -111,6 +113,7 @@ function App() {
 			</div>
 			<section className="main-section">
 				<Aside {...{ setGrid, setGeneration, setRunning, rowsCols, randomCells }} />
+
 				<section>
 					<Header
 						speed={speed}
@@ -124,7 +127,13 @@ function App() {
 						generation={generation}
 						setSpeed={setSpeed}
 					/>
-					<Game {...{ rowsCols, grid, running, updateGrid }} />
+					{/* https://github.com/remix-run/react-router/blob/v5.2.0/packages/react-router/docs/api/Route.md */}
+					<Route exact path="/og">
+						<Game {...{ rowsCols, grid, running, updateGrid }} />
+					</Route>
+					<Route exact path="/with-canvas">
+						<GOLCanvas {...{ rowsCols, grid, running, updateGrid }} />
+					</Route>
 				</section>
 			</section>
 		</main>
