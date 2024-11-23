@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { createGrid } from "./cgol_algorithm.js";
+import { createGrid } from "./../utils/cgol_algorithm";
 import "./header.css";
 
 function Header({

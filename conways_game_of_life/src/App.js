@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useMemo } from "react";
 import "./App.css";
 
-// Components
-import Header from "./Header";
-import Cell from "./Cell";
-import About from "./About";
-
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
-import { createGrid, runComputation } from "./cgol_algorithm";
-import Aside from "./Aside";
+
+// Components
+import Header from "./components/Header";
+import Cell from "./components/Cell";
+import About from "./components/About";
+
+import { createGrid, runComputation } from "./utils/cgol_algorithm";
+import Aside from "./components/Aside";
+import Game from "./layout/original";
 
 function App() {
 	const [rowsCols, setRowCol] = useState({
@@ -122,21 +124,7 @@ function App() {
 						generation={generation}
 						setSpeed={setSpeed}
 					/>
-					<section
-						className="game_grid"
-						style={{
-							gridTemplateColumns: `repeat(${rowsCols.cols}, ${
-								(25 / rowsCols.cols) * 25 + 2
-							}px`, // Dynamically adjust the columns width based on the number of columns on the screen
-						}}
-					>
-						<Cell
-							grid={grid}
-							running={running}
-							updateGrid={updateGrid}
-							rowsCols={rowsCols}
-						/>
-					</section>
+					<Game {...{ rowsCols, grid, running, updateGrid }} />
 				</section>
 			</section>
 		</main>

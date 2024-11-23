@@ -7,7 +7,7 @@ import {
 	createGridLWSS,
 	createGridHWSS,
 	createGridPenta_decathlon,
-} from "./cgol_algorithm.js";
+} from "./../utils/cgol_algorithm";
 import "./header.css";
 
 function Aside({ setGrid, setGeneration, setRunning, rowsCols, randomCells }) {
