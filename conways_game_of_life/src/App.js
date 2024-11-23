@@ -3,7 +3,6 @@ import "./App.css";
 
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
-import { Route } from "react-router-dom/cjs/react-router-dom.min";
 
 // Components
 import Header from "./components/Header";
@@ -11,8 +10,7 @@ import About from "./components/About";
 
 import { createGrid, runComputation } from "./utils/cgol_algorithm";
 import Aside from "./components/Aside";
-import Game from "./layout/original";
-import GOLCanvas from "./layout/withCanvas";
+import Layout from "./layout";
 
 function App() {
 	const [rowsCols, setRowCol] = useState({
@@ -127,12 +125,7 @@ function App() {
 						setSpeed={setSpeed}
 					/>
 					{/* https://github.com/remix-run/react-router/blob/v5.2.0/packages/react-router/docs/api/Route.md */}
-					<Route exact path="/og">
-						<Game {...{ rowsCols, grid, running, updateGrid }} />
-					</Route>
-					<Route exact path="/with-canvas">
-						<GOLCanvas {...{ rowsCols, grid, running, updateGrid }} />
-					</Route>
+					<Layout {...{ rowsCols, grid, running, updateGrid }} />
 				</section>
 			</section>
 		</main>
