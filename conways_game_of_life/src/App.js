@@ -75,7 +75,6 @@ function App() {
 	 * This Function is used to update the a cell when a user clicks on it toggling from alive to dead
 	 */
 	const updateGrid = (i, k) => {
-		console.log(i, k);
 		setGrid((prevState) => {
 			return prevState.map((rows, rowsIndex) =>
 				rows.map((column, columnIndex) => {
